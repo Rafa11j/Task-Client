@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Container, InfoName, InfoNameTitle, InfoNameItems } from './styles';
 import taskListIcon from '../../assets/checklist.svg';
@@ -23,4 +23,4 @@ const TaskList: React.FC<IProps> = props => {
   );
 };
 
-export default TaskList;
+export default memo(TaskList);

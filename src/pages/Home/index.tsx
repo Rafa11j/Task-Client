@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 import { Container, PageHeader, Content, Button } from './styles';
 import api from '../../services/api';
 
@@ -8,6 +9,7 @@ import TaskList from '../../components/TaskList';
 import ITaskList from '../../interfaces/taskList';
 
 const Home: React.FC = () => {
+  const history = useHistory();
   const [taskList, setTaskList] = useState<ITaskList[]>([]);
 
   const loadTasksList = useCallback(async () => {
@@ -19,6 +21,10 @@ const Home: React.FC = () => {
     }
   }, []);
 
+  const newTaskList = useCallback(() => {
+    history.push('/cadastro');
+  }, [history]);
+
   useEffect(() => {
     loadTasksList();
   }, [loadTasksList]);
@@ -28,7 +34,7 @@ const Home: React.FC = () => {
       <Container>
         <PageHeader>
           <h2>Minhas Listas</h2>
-          <Button>
+          <Button onClick={newTaskList}>
             <FaPlus />
             Nova Lista
           </Button>
