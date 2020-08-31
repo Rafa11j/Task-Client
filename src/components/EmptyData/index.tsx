@@ -3,11 +3,16 @@ import { Container } from './styles';
 
 import dataEmpty from '../../assets/mailbox.svg';
 
-const EmptyData: React.FC = () => {
+interface IProps {
+  title: string;
+}
+
+const EmptyData: React.FC<IProps> = props => {
+  const { title } = props;
   return (
     <Container>
       <img src={dataEmpty} alt="NoData" />
-      <h3>Nenuma Lista Cadastrada</h3>
+      <h3>{title}</h3>
     </Container>
   );
 };

@@ -41,7 +41,7 @@ const Home: React.FC = () => {
         </PageHeader>
         <Content>
           {taskList.length === 0 ? (
-            <EmptyData />
+            <EmptyData title="Nenhuma Lista Encontrada" />
           ) : (
             taskList.map(task => <TaskList key={task.id} taskList={task} />)
           )}
