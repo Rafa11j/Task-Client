@@ -30,4 +30,4 @@ const TaskListItem: React.FC<IProps> = props => {
   );
 };
 
-export default TaskListItem;
+export default memo(TaskListItem);
