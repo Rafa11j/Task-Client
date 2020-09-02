@@ -1,44 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Tecnologias Utilizadas:
+ - React
+ - TypeScript
+ - Styled Components
+ - Docker
 
-## Available Scripts
+### Configuração (Sem Docker)
 
-In the project directory, you can run:
+* O projeto necessita tando do `node.js` e `yarn`para ser executado,
+caso não tenha em sua máquina, acesse os links abaixo:
+    * node.js: [Baixar node.js](https://nodejs.org/pt-br/download/)
+    * yarn: [Baixar yarn](https://legacy.yarnpkg.com/en/docs/install/#mac-stable)
+    
+* Logo após a etapa de instalação, basta entrar na pasta do projeto e rodar o comando
+`yarn install`, para o projeto baixar todas as bibliotecas necessárias.
+* Renomear o arquivo `.env.exemple` para `.env` pois nele há o endereço da url da api que é necessário para o funcionamento da aplicação:
+```
+ REACT_APP_API_URL=http://localhost:8080/api/v1
+``` 
 
-### `yarn start`
+* Por fim, dando tudo certo até o seguinte momento, temos 1 comando para rodar:
+    * `yarn start`: este comando irá levantar a aplicação no seguinte endereço: [http://localhost:3000](http://localhost:3000)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Configuração (Com Docker)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* O projeto necessita apenas do `node.js` para ser executado,
+caso não tenha em sua máquina, acesse os links abaixo:
+    * node.js: [Baixar node.js](https://nodejs.org/pt-br/download/)
+    
+* Logo após a etapa de instalação, basta entrar na pasta do projeto e rodar o comando
+`yarn install`, para o projeto baixar todas as bibliotecas necessárias.
+* Renomear o arquivo `.env.exemple` para `.env` pois nele há o endereço da url da api que é necessário para o funcionamento da aplicação:
+```
+ REACT_APP_API_URL=http://localhost:8080/api/v1
+``` 
 
-### `yarn test`
+* Depois de confihurar a URL da api, vamos gerar a imagem da aplicação com o docker, com o seguinte comando:
+```
+  docker build -t task-app .
+```
+* Este processo demora um pouco.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Depois de gerar a imagem da aplicação, rode o seguinte comando para levantar o container da aplicação:
+```
+docker run \                
+    -it \
+    --rm \
+    -v ${PWD}:/app \
+    -v /app/node_modules \
+    -p 3001:3000 \
+    -e CHOKIDAR_USEPOLLING=true \
+    task-app
 
-### `yarn build`
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Por fim, dando tudo certo até o seguinte momento, podemos acessar o endereço: [http://localhost:3001](http://localhost:3001)
